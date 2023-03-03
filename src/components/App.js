@@ -1,0 +1,45 @@
+import { useEffect, useState } from 'react';
+import './App.css';
+import axios from 'axios';
+
+import { SearchBar } from './SearchBar/SearchBar';
+import { Forecast } from './Forecast/Forecast';
+
+const API_KEY = "f84519cc88de7b9b4e6a53de54726931";
+const BASE_URL = "https://api.openweathermap.org";
+axios.defaults.baseURL = BASE_URL;
+axios.defaults.params = {
+  appid: API_KEY
+};
+
+function App() {
+  const [query, setQuery] = useState("");
+  const [weather, setWeather] = useState([]);
+
+  useEffect(()=>{
+    if(!query) return;
+    axios.get(`geo/1.0/direct?q=${query}&limit=5`).then(console.log)
+    // console.log(response)
+    // const response = axios.get('data/2.5/weather?lat={lat}&lon={lon}&appid={API key}')
+    
+  },[query])
+
+  const handleQueryChange = e => {
+    e.preventDefault();
+    const input= e.target.elements.query;    
+    setQuery(input.value)
+    input.value = "";
+  }
+  
+
+  return (
+    <div className="App">
+      
+        
+        <SearchBar onSubmit={handleQueryChange}></SearchBar>
+        <Forecast weatherObj={weather}></Forecast>
+    </div>
+  );
+}
+
+export default App;
