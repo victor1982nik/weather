@@ -17,17 +17,29 @@ function App() {
   const [query, setQuery] = useState("");
   const [weather, setWeather] = useState([]);
   const [cities, setCities] = useState([]);
-  
+  const [city, setCity] = useState([]);
+  const [isSelected, setIsSelected] = useState(false);
 
   useEffect(() => {
     if (!query) return;
-    const getCitiesByquery = async (query) => {
+    const getCitiesByQuery = async (query) => {
       const response = await getCities(query);
-      console.log(response.data);
+      // console.log(response.data);
       setCities(response.data);
     };
-    getCitiesByquery(query);
+    getCitiesByQuery(query);
   }, [query]);
+
+  useEffect(() => {
+    if (city.length ===0) return;
+    // console.log("useEffect", city)
+    const getForecastByCoordinates = async (lat,lon)=>{
+      const response = await getForecast(lat, lon);
+      //console.log(response.data);
+      setWeather(response.data)
+    }
+    getForecastByCoordinates(city.lat, city.lon)
+  }, [city]);
 
   const handleQueryChange = (e) => {
     e.preventDefault();
@@ -36,11 +48,13 @@ function App() {
   const handleChangeInput = (e) => {    
     const input = e.target;
     setQuery(input.value);
+    setIsSelected(false)
   };
 
-  const handleClick = (city) =>{
-      // todo выбран город сделать запрос с координатами
-      console.log(city)
+  const handleClick = (selectedCity) =>{      
+      setCity(selectedCity);
+      setIsSelected(true);
+      setQuery("");
   }
 
   return (
@@ -51,6 +65,7 @@ function App() {
         onChange={handleChangeInput}
         citiesList={cities}
         onClick={handleClick}
+        isSelected={isSelected}
       />
       <Forecast weatherObj={weather}></Forecast>
     </div>

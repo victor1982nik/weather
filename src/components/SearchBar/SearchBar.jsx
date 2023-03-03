@@ -1,4 +1,4 @@
-import { v4 as uuidv4 } from "uuid";
+import { nanoid } from 'nanoid';
 import { Button } from "./SearchBar.styled";
 
 export const SearchBar = ({
@@ -6,7 +6,8 @@ export const SearchBar = ({
   onSubmit,
   onChange,
   citiesList,
-  Onclick,
+  onClick,
+  isSelected
 }) => {
   return (
     <form onSubmit={onSubmit}>
@@ -19,18 +20,18 @@ export const SearchBar = ({
         value={inputText}
         onChange={onChange}
       />
-      <ul>
+      <button type="submit" aria-label="search button">Search</button>
+      {!isSelected && (<ul>
         {citiesList.map((city) => (
-          <li key={uuidv4()}>
-            <Button onClick={Onclick(city)}>
+          <li key={nanoid()}>
+            <Button onClick={()=>onClick(city)}>
               {city.name}, {city.state}, {city.country}
             </Button>
           </li>
         ))}
-      </ul>
-      <button type="submit" aria-label="search button">
-        Search
-      </button>
+      </ul>)}
+      
+        
     </form>
   );
 };
