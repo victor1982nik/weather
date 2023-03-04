@@ -13,7 +13,10 @@ export const getCities = query => {
 }
 
 export const getForecast = (lat, lon) => {
-    return axios.get(`data/2.5/weather?lat=${lat}&lon=${lon}`)
+    return axios.get(`data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric`)
 }
-
-
+/*
+export const getForecast = (lat, lon) => {
+  return fetch(`${BASE_URL}/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`)               
+}
+*/

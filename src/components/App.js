@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import axios from "axios";
+// import axios from "axios";
 
 import { SearchBar } from "./SearchBar/SearchBar";
 import { Forecast } from "./Forecast/Forecast";
 import { getCities, getForecast } from "./api/fetchData";
-
+/*
 const API_KEY = "f84519cc88de7b9b4e6a53de54726931";
 const BASE_URL = "https://api.openweathermap.org";
 axios.defaults.baseURL = BASE_URL;
 axios.defaults.params = {
   appid: API_KEY,
 };
-
+*/
 function App() {
   const [query, setQuery] = useState("");
   const [weather, setWeather] = useState([]);
@@ -35,7 +35,7 @@ function App() {
     // console.log("useEffect", city)
     const getForecastByCoordinates = async (lat,lon)=>{
       const response = await getForecast(lat, lon);
-      //console.log(response.data);
+      console.log(response);
       setWeather(response.data)
     }
     getForecastByCoordinates(city.lat, city.lon)
