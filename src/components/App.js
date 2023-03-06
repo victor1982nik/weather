@@ -35,25 +35,32 @@ function App() {
     // console.log("useEffect", city)
     const getForecastByCoordinates = async (lat,lon)=>{
       const response = await getForecast(lat, lon);
-      console.log(response);
+      console.log(response.data);
       setWeather(response.data)
+      setIsSelected(false)
     }
     getForecastByCoordinates(city.lat, city.lon)
   }, [city]);
 
   const handleQueryChange = (e) => {
     e.preventDefault();
+    
+    const form = e.target;
+    console.log(form.elements.query.value)
+    setQuery(form.elements.query.value)
+    setIsSelected(true);
+    // handleChangeInput(e)
   };
 
   const handleChangeInput = (e) => {    
     const input = e.target;
     setQuery(input.value);
-    setIsSelected(false)
+    setIsSelected(true);
   };
 
   const handleClick = (selectedCity) =>{      
       setCity(selectedCity);
-      setIsSelected(true);
+      // setIsSelected(true);
       setQuery("");
   }
 
