@@ -1,9 +1,9 @@
 import { nanoid } from "nanoid";
-import { Container, Item, Ul } from "./Forecast.styled";
-import { DateTime } from "luxon";
+import { Container, Item, Ul } from "../Forecast/Forecast.styled";
+const { DateTime } = require('luxon');
 const desktopParam = 8;
 
-export const Forecast = ({ weatherObj }) => {
+export const ForecastDaily = ({ weatherObj }) => {
   if (weatherObj.length === 0) return;
   const { city } = weatherObj;
 

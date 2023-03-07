@@ -1,18 +1,12 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-// import axios from "axios";
-
 import { SearchBar } from "./SearchBar/SearchBar";
-import { Forecast } from "./Forecast/Forecast";
-import { getCities, getForecast } from "./api/fetchData";
-/*
-const API_KEY = "f84519cc88de7b9b4e6a53de54726931";
-const BASE_URL = "https://api.openweathermap.org";
-axios.defaults.baseURL = BASE_URL;
-axios.defaults.params = {
-  appid: API_KEY,
-};
-*/
+import { ForecastDaily} from "./ForecastDaily/ForecastDaily";
+//import { Forecast, } from "./Forecast/Forecast";
+import { getCities, getForecast, getDailyForecast } from "./api/fetchData";
+
+
+
 function App() {
   const [query, setQuery] = useState("");
   const [weather, setWeather] = useState([]);
@@ -32,11 +26,14 @@ function App() {
 
   useEffect(() => {
     if (city.length ===0) return;
-    // console.log("useEffect", city)
+     console.log("useEffect", city)
+    
+    //console.log(localTime)
     const getForecastByCoordinates = async (lat,lon)=>{
-      const response = await getForecast(lat, lon);
-      console.log(response.data);
-      setWeather(response.data)
+
+      const response = await getDailyForecast(lat, lon);
+      //console.log(response.data);
+      // setWeather(response.data)
       setIsSelected(false)
     }
     getForecastByCoordinates(city.lat, city.lon)
@@ -64,6 +61,8 @@ function App() {
       setQuery("");
   }
 
+  
+
   return (
     <div className="App">
       <SearchBar
@@ -74,7 +73,8 @@ function App() {
         onClick={handleClick}
         isSelected={isSelected}
       />
-      <Forecast weatherObj={weather}></Forecast>
+      {/* <Forecast weatherObj={weather}></Forecast> */}
+      <ForecastDaily weatherObj={weather}></ForecastDaily>
     </div>
   );
 }
