@@ -12,6 +12,10 @@ export const getCities = (query) => {
   return axios.get(`geo/1.0/direct?q=${query}&limit=5`);
 };
 
+export const getCurrentWeather = (lat, lon) => {  
+  return axios.get(`data/2.5/weather?lat=${lat}&lon=${lon}&units=metric`);
+};
+
 export const getForecast = (lat, lon) => {  
   return axios.get(`data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric`);
 };

@@ -1,15 +1,36 @@
 import { nanoid } from "nanoid";
-import { Button, Container, Form, Input, SubmitButton } from "./SearchBar.styled";
-// import { FaSearch } from 'react-icons/fa';
+import { Button, Container, Form, Input} from "./SearchBar.styled";
+import { useEffect, useState } from "react";
+import { getCities } from "../api/fetchData";
 
-export const SearchBar = ({
-  inputText,
-  onSubmit,
-  onChange,
-  citiesList,
-  onClick,
-  isSelected,
+export const SearchBar = ({  
+  onSubmit,   
+  onClick  
 }) => {
+  const [query, setQuery] = useState("");
+  const [isSelected, setIsSelected] = useState(false);
+  const [cities, setCities] = useState([]);
+
+  useEffect(() => {
+    if (!query) return;
+    const getCitiesByQuery = async (query) => {
+      const response = await getCities(query);
+      // console.log(response.data);
+      setCities(response.data);
+    };
+    getCitiesByQuery(query);
+  }, [query]);
+
+  const handleChangeInput = (e) => {    
+    const input = e.target;
+    setQuery(input.value);
+    setIsSelected(true);
+  };
+  const handleClick = (city) => {
+    setIsSelected(false);
+   onClick(city)
+}
+
   return (
     <Container>
       <Form onSubmit={onSubmit}>
@@ -20,8 +41,8 @@ export const SearchBar = ({
             pattern="^[a-zA-Z\s]*$"
             title="May contain only letters."
             placeholder="Enter city name"
-            value={inputText}
-            onChange={onChange}
+            value={query}
+            onChange={handleChangeInput}
           />
           {/* <SubmitButton
             type="submit"
@@ -33,7 +54,7 @@ export const SearchBar = ({
         </div>
         {isSelected && (
           <ul style={{ position: "relative", width:"175px", left:"50%", transform: "translate(-50%)" }}>
-            {citiesList.map((city, index) => (
+            {cities.map((city, index) => (
               <li
                 key={nanoid()}
                 style={{
@@ -41,7 +62,7 @@ export const SearchBar = ({
                   top: index * 20,                  
                 }}
               >
-                <Button onClick={() => onClick(city)}>
+                <Button onClick={()=>handleClick(city)}>
                   {city.name}, {city.state}, {city.country}
                 </Button>
               </li>
