@@ -20,7 +20,22 @@ export const Forecast = ({ weatherObj }) => {
   return (
     <Container>
 
-      <div>Weather in the city: {city.name} </div>
+      
+
+      {/* <div>
+        {new Date(list[0].dt*1000).getHours()}: {list[0].main.temp}
+      </div>
+      <div>Humidity: {list[0].main.humidity}</div>
+      <div>Pressure:{list[0].main.pressure}</div>
+      <div>Temperature: {list[0].main.temp}</div>
+      <div>Clouds: {list[0].weather[0].main}</div>
+      <div>Wind speed: {list[0].wind.speed}</div> */}
+    </Container>
+  );
+};
+
+/*
+<div>Weather in the city: {city.name} </div>
       <div>Time: {localTime.toFormat('HH:mm')}</div>
       {filteredData && (
         <Ul>
@@ -45,15 +60,4 @@ export const Forecast = ({ weatherObj }) => {
           ))}
         </Ul>
       )}
-
-      {/* <div>
-        {new Date(list[0].dt*1000).getHours()}: {list[0].main.temp}
-      </div>
-      <div>Humidity: {list[0].main.humidity}</div>
-      <div>Pressure:{list[0].main.pressure}</div>
-      <div>Temperature: {list[0].main.temp}</div>
-      <div>Clouds: {list[0].weather[0].main}</div>
-      <div>Wind speed: {list[0].wind.speed}</div> */}
-    </Container>
-  );
-};
+*/

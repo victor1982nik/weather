@@ -10,9 +10,7 @@ export const Ul = styled.ul`
 `;
 
 export const Container = styled.div`
-  margin-left:auto;
-  margin-right:auto;
-  padding:15px;
+  padding: 15px;
   padding-bottom:30px;
 `;
 

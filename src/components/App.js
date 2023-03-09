@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import { SearchBar } from "./SearchBar/SearchBar";
-import { ForecastDaily} from "./ForecastDaily/ForecastDaily";
-//import { Forecast, } from "./Forecast/Forecast";
-import { getCities, getForecast, getDailyForecast } from "./api/fetchData";
+import { Forecast, } from "./Forecast/Forecast";
+import { getCities, getForecast,  } from "./api/fetchData";
 
 
 
@@ -26,14 +25,12 @@ function App() {
 
   useEffect(() => {
     if (city.length ===0) return;
-     console.log("useEffect", city)
+     console.log("in useEffect", city)    
     
-    //console.log(localTime)
     const getForecastByCoordinates = async (lat,lon)=>{
-
-      const response = await getDailyForecast(lat, lon);
+      const response = await getForecast(lat, lon);
       //console.log(response.data);
-      // setWeather(response.data)
+       setWeather(response.data)
       setIsSelected(false)
     }
     getForecastByCoordinates(city.lat, city.lon)
@@ -64,7 +61,8 @@ function App() {
   
 
   return (
-    <div className="App">
+    <div className="App container">
+      
       <SearchBar
         inputText={query}
         onSubmit={handleQueryChange}
@@ -73,8 +71,8 @@ function App() {
         onClick={handleClick}
         isSelected={isSelected}
       />
-      {/* <Forecast weatherObj={weather}></Forecast> */}
-      <ForecastDaily weatherObj={weather}></ForecastDaily>
+       <Forecast weatherObj={weather}></Forecast> 
+      
     </div>
   );
 }
