@@ -3,6 +3,7 @@ import "./App.css";
 import { SearchBar } from "./SearchBar/SearchBar";
 import { CurrentWeather } from "./CurrentWeather/CurrentWeather";
 import {  getCurrentWeather, getForecast } from "./api/fetchData";
+import { Forecast } from "./Forecast/Forecast";
 
 function App() {  
   const [currentWeather, setCurrentWeather] = useState([]);  
@@ -38,8 +39,8 @@ function App() {
         onSubmit={handleQueryChange}          
         onClick={handleClick}        
       />
-       <CurrentWeather weatherObj={currentWeather}></CurrentWeather> 
-      
+       {currentWeather && <CurrentWeather weatherObj={currentWeather}></CurrentWeather> }
+        {forecast && <Forecast forecast={forecast}></Forecast>}
     </div>
   );
 }

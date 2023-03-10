@@ -29,13 +29,13 @@ export const Item = styled.li`
   `;
 
 export const Card = styled.div`
-margin: 30px auto 30px auto;
+margin: 20px auto 20px auto;
 padding: 10px 20px 20px 20px;
 width: 300px;
 border-radius:6px;
 box-shadow: 8px -2px 16px 2px rgb(0 0 0 / 0.2);
 color: #fff;
-background-color: #333;
+background-color: aquamarine;
 `;
 
 export const BoxTop = styled.div`
@@ -80,4 +80,5 @@ padding: 10px
 
 export const BoxRow = styled.div`
 display: flex;
+justify-content: space-between;
 `;

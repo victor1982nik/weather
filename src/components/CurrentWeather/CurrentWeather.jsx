@@ -25,7 +25,7 @@ export const CurrentWeather = ({ weatherObj }) => {
         <BoxTop>
           <div>
             <BoxCity>{name} </BoxCity>
-            <BoxWeatherDescr>{weather[0].main}</BoxWeatherDescr>
+            <BoxWeatherDescr>{weather[0].description}</BoxWeatherDescr>
           </div>
           <Img alt="weather" src={weatherImage} />
         </BoxTop>
@@ -39,11 +39,15 @@ export const CurrentWeather = ({ weatherObj }) => {
             </BoxRow>
             <BoxRow>
               <span>Pressure:</span>
-              <span>{main.pressure}hPa </span>
+              <span>{main.pressure} mb</span>
             </BoxRow>
             <BoxRow>
               <span>Wind:</span>
               <span>{Math.round(wind.speed)} m/s</span>
+            </BoxRow>
+            <BoxRow>
+              <span>Real feel:</span>
+              <span>{Math.round(main.feels_like)}°C</span>
             </BoxRow>
           </BoxWeatherDetails>
         </BoxBottom>
@@ -52,30 +56,5 @@ export const CurrentWeather = ({ weatherObj }) => {
   );
 };
 
-/*
-<div>Weather in the city: {city.name} </div>
-      <div>Time: {localTime.toFormat('HH:mm')}</div>
-      {filteredData && (
-        <Ul>
-          {filteredData.map((item) => (
-            <Item key={nanoid()}>
-              <div>                
-                {item.dt_txt.slice(11,13)}                
-              </div>
-              <div>
-                Temperature: {Math.round(item.main.temp)}
-                <sup>o</sup>
-              </div>
-              <div>Humidity: {item.main.humidity}%</div>
-              <div>Pressure:{item.main.pressure}</div>
-              <div>
-                Feels like: {Math.round(item.main.feels_like)}
-                <sup>o</sup>
-              </div>
-              <div>Clouds: {item.weather[0].main}</div>
-              <div>Wind speed: {Math.round(item.wind.speed)}m/s</div>
-            </Item>
-          ))}
-        </Ul>
-      )}
-*/
+
+
